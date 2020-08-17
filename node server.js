@@ -15,16 +15,25 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+})
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
 
 
 
-app.get('/', (request, res) =>{
 
+
+
+
+//Server request to listen
+app.get('/', (req, res) =>{
     res.json("It's working")
 });
 
 
-// Log started server
 app.listen(8080, () => {
     console.log("App is running at port ", 8080);
 });
