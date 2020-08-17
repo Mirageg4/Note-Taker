@@ -11,7 +11,7 @@ const app = express();
 //Defined Port
 const port = process.env.port || 8080;
 
-//Routes
+//Express handling/parsing of POST/PUT Routes
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
