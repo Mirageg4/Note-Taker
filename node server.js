@@ -2,6 +2,9 @@
 
 const express = require("express");
 const path = require("path");
+const fs = require ("fs");
+
+let db = require("./db/db.json");
 
 const app = express();
 
@@ -14,11 +17,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
-
+//File Paths
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 })
-app.get("/notes", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
