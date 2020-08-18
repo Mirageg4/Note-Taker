@@ -86,9 +86,12 @@ app.put('/api/notes/:id', (req, res) => {
     }
 
     // Find note with the same id in the 'db' array (Array findIndex)
+        
+        let findId = array.findIndex(id, db)
+        return findId = id;
 
     // Handle case in which the note with the specified id does not exist
-    
+    //xconst validateId ()
         if (id != id) {
             res.status(404).json({
                 ok: false,
@@ -96,7 +99,11 @@ app.put('/api/notes/:id', (req, res) => {
                 error: "This id does not exist!"
             });
     // Update note in 'db' array
+
+
     // db[idx] = updatedNote
+
+
 
     // Save to the 'db.json' file
     fs.writeFileSync(DB_PATH, JSON.stringify(db))
