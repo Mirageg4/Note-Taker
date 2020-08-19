@@ -114,11 +114,19 @@ app.put('/api/notes/:id', (req, res) => {
 
     // Update note in 'db' array
 
+    app.put('/api/notes/:id', (req, res) => {
+        const { title, text } = req.body
+        const { id } = req.params
 
+        fs.writeFileSync(DB_PATH, JSON.stringify(db))
 
-
+        res.json({
+            ok: true,
+            data: {} // Replace with updatedNote
+        });
 
     // db[idx] = updatedNote
+        
 
 
 
