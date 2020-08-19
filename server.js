@@ -3,7 +3,9 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { v4: uuidv4 } = require('uuid');
+const {
+    v4: uuidv4
+} = require('uuid');
 
 const DB_PATH = "./db/db.json"
 let db = require(DB_PATH);
@@ -15,7 +17,9 @@ const port = process.env.port || 8080;
 
 //Express handling/parsing of POST/PUT Routes
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -39,7 +43,10 @@ app.get('/api/notes', (req, res) => {
 
 // POST - Create one note
 app.post('/api/notes', (req, res) => {
-    const { title, text } = req.body
+    const {
+        title,
+        text
+    } = req.body
 
     // Handle Errors
     if (!title || !text) {
@@ -67,80 +74,94 @@ app.post('/api/notes', (req, res) => {
     res.json({
         ok: true,
         data: newNote
-    })});
+    })
+});
 
 // PUT - Update one note
 app.put('/api/notes/:id', (req, res) => {
-    const { title, text } = req.body
-    const { id } = req.params
+    const {
+        title: newTitle,
+        text: newText
+    } = req.body
+
+    const {
+        id
+    } = req.params
 
     // Handle Errors
-    if (!title && !text) {
+    if (!newTitle && !newText) {
         res.status(404).json({
             ok: false,
             data: null,
-            error: "To update a note, please provide an 'title' or 'text' property."
+            error: "To update a note, please provide a 'title' or 'text' property."
         })
 
         return;
     }
 
-    // Find note with the same id in the 'db' array (Array findIndex)
-        
-        const findId = array.findIndex(id, db)
-        
-        app.get('/api/notes', (req, res) => {
-            array.findIndex(id, db)
-            res.json({
-                ok: true,
-                data: {}
-            })
-        });
-        
+    // Check to see if a note with the specified ID exists
 
-    // Handle case in which the note with the specified id does not exist
-        const validateId = validateId(req, res,)
+    const noteIndex = db.findIndex(note => id === note.id)
 
-        app.get('/api/notes', (req, res) => {
-            validateId(id, db)
+    if (noteIndex === -1) {
+        res.status(404).json({
+            ok: false,
+            data: null,
+            error: `A note with an ID of ${id} does not exist. Please provide a valid note ID.`
+        })
 
-        if (id != id) {
-            res.status(404).json({
-                ok: false,
-                data: null,
-                error: "This id does not exist!"
-            });
+        return;
+    }
 
+    const {
+        title: oldTitle,
+        text: oldText
+    } = db[noteIndex]
 
-    // Update note in 'db' array
+    let updatedNote = {
+        ...db[noteIndex],
+        title: newTitle ? newTitle : oldTitle,
+        text: newText ? newText : oldText
+    }
 
-    app.put('/api/notes/:id', (req, res) => {
-        const { title, text } = req.body
-        const { id } = req.params
+    db[noteIndex] = updatedNote
 
-        fs.writeFileSync(DB_PATH, JSON.stringify(db))
-
-        res.json({
-            ok: true,
-            data: {} // Replace with updatedNote
-        });
-
-    // db[idx] = updatedNote
-        
-
-
-
-    // Save to the 'db.json' file
+    // Save to Database
     fs.writeFileSync(DB_PATH, JSON.stringify(db))
 
     res.json({
         ok: true,
-        data: {} // Replace with updatedNote
+        data: updatedNote
     })
-});
+
+})
 
 // DELETE - Delete one note
-app.delete('/api/ping', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
+    const {
+        id
+    } = req.params
+
+    // Check to see if a note with the specified ID exists
+
+    const noteIndex = db.findIndex(note => id === note.id)
+
+    if (noteIndex === -1) {
+        res.status(404).json({
+            ok: false,
+            data: null,
+            error: `A note with an ID of ${id} does not exist. Please provide a valid note ID.`
+        })
+
+        return;
+    }
+
+    // Remove the note from the db
+    db.splice(noteIndex, 1)
+
+    // Save to Database
+    fs.writeFileSync(DB_PATH, JSON.stringify(db))
+
     res.json({
         ok: true
     })
