@@ -23,7 +23,7 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(express.static("public"));
 
-//File Paths
+//File Paths 
 app.get("/", (req, res) => {
     console.log("Hello!")
     res.sendFile(path.join(__dirname, "./public/index.html"));
