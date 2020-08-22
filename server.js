@@ -171,7 +171,7 @@ app.delete('/api/notes/:id', (req, res) => {
 fs.readFileSync(DB_PATH, JSON.parse(db))
 
 res.json({
-    ok: false
+    ok: true
 })
 
 
