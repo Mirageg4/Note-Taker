@@ -16,7 +16,7 @@
 <h2>Pull Requests welcome for contribution</h2>
 <hr>
 <p>John Manouse</p>
-<p>Live Link: <a href="https://mirageg4.github.io/Note-Taker/.">Note-Taker Live Link</a></p>
+<p>Live Link: <a href="https://sleepy-sands-11047.herokuapp.com/">Note-Taker Live Link</a></p>
 <p>Github: <a href="https://github.com/Mirageg4/Note-Taker">Note-Taker Repo</a></p>
 
 <hr>

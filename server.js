@@ -167,12 +167,6 @@ app.delete('/api/notes/:id', (req, res) => {
     })
 });
 
-// Read From Database???
-fs.readFileSync(DB_PATH, JSON.parse(db))
-
-res.json({
-    ok: true
-})
 
 
 app.listen(8080, () => {
