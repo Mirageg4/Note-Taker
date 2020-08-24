@@ -13,7 +13,7 @@ let db = require(DB_PATH);
 const app = express();
 
 //Defined Port
-const port = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 
 //Express handling/parsing of POST/PUT Routes
 
@@ -169,6 +169,6 @@ app.delete('/api/notes/:id', (req, res) => {
 
 
 
-app.listen(8080, () => {
-    console.log("App is running at port ", 8080);
+app.listen(PORT, () => {
+    console.log("App is running at port ", PORT);
 });
