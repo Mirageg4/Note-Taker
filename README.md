@@ -20,7 +20,7 @@
 <p>Github: <a href="https://github.com/Mirageg4/Note-Taker">Note-Taker Repo</a></p>
 
 <hr>
-<img src ="./public/ScreenShot-Note.png"/>
+<img src ="./public/Screenshot-Note.png"/>
 <hr>              
 <p>License: Project is licensed under the MIT License. 
 See <a href ="LICENSE.md">LICENSE</a> file for details.
